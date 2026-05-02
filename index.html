@@ -23,6 +23,11 @@
       box-sizing: border-box;
     }
 
+    img, video {
+      max-width: 100%;
+      height: auto;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -50,6 +55,12 @@
       align-items: center;
       gap: 14px;
       flex-wrap: wrap;
+      position: relative;
+    }
+
+    .brand-info {
+      display: flex;
+      flex-direction: column;
     }
 
     .brand {
@@ -58,6 +69,15 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--accent-2);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 8px;
     }
 
     .nav-links {
@@ -215,7 +235,7 @@
 
     .hero-stats {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       gap: 14px;
       margin-top: 20px;
     }
@@ -243,7 +263,7 @@
     }
 
     .section.columns {
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1fr;
     }
 
     .section-heading {
@@ -283,7 +303,7 @@
 
     .info-card.compact {
       padding: 20px;
-      height:225px;
+      min-height: 225px;
     }
 
     .info-card h3 {
@@ -451,17 +471,59 @@
       font-size: 0.95rem;
     }
 
-    @media (min-width: 960px) {
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(10, 18, 45, 0.95);
+        padding: 16px;
+        border-radius: 12px;
+        border: 1px solid rgba(34, 211, 238, 0.1);
+        gap: 12px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+      
+      .hero-copy h1 {
+        font-size: clamp(2rem, 8vw, 2.6rem);
+      }
+    }
+
+    @media (min-width: 480px) {
+      .hero-stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .section.columns {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      
+      .hero-panel {
+        padding: 36px;
+      }
+    }
+
+    @media (min-width: 1024px) {
       .hero {
         grid-template-columns: 1.2fr 0.8fr;
       }
 
       .hero-panel {
         padding: 42px;
-      }
-
-      .hero-stats {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .section.columns {
@@ -489,11 +551,18 @@
   <main class="page">
     <div class="page-header">
       <div class="topbar">
-        <div>
+        <div class="brand-info">
           <div class="brand">Resume</div>
           <p style="margin: 8px 0 0; color: var(--muted);">Harshavardhan — Web Designer & Frontend Developer</p>
         </div>
-        <nav class="nav-links">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+          <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <nav class="nav-links" id="nav-links">
           <a href="#summary">Summary</a>
           <a href="#experience">Experience</a>
           <a href="#skills">Skills</a>
@@ -742,6 +811,23 @@
           span.style.animation = `popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards`;
           span.style.animationDelay = `${0.2 + index * 0.08}s`;
           nameEl.appendChild(span);
+        });
+      }
+
+      // Mobile Menu Toggle
+      const menuToggle = document.getElementById("menu-toggle");
+      const navLinks = document.getElementById("nav-links");
+      
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener("click", () => {
+          navLinks.classList.toggle("active");
+        });
+        
+        // Close menu when clicking a link
+        navLinks.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", () => {
+            navLinks.classList.remove("active");
+          });
         });
       }
     });
