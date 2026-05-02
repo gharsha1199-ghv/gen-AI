@@ -318,6 +318,22 @@
       line-height: 1.5;
     }
 
+    .languages-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .languages-list span {
+      background: rgba(34, 211, 238, 0.1);
+      color: #22d3ee;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(34, 211, 238, 0.2);
+    }
+
     .skills-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -479,13 +495,20 @@
 
       .nav-links {
         display: none;
-        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 99;
         flex-direction: column;
-        background: rgba(10, 18, 45, 0.95);
+        background: rgba(10, 18, 45, 0.98);
+        backdrop-filter: blur(8px);
         padding: 16px;
         border-radius: 12px;
         border: 1px solid rgba(34, 211, 238, 0.1);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
         gap: 12px;
+        margin-top: 12px;
       }
 
       .nav-links.active {
@@ -494,6 +517,31 @@
       
       .hero-copy h1 {
         font-size: clamp(2rem, 8vw, 2.6rem);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .skills-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .skill-card {
+        padding: 10px;
+        gap: 8px;
+        min-height: 54px;
+        border-radius: 16px;
+      }
+      .skill-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 12px;
+      }
+      .skill-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+      .skill-name {
+        font-size: 0.8rem;
       }
     }
 
@@ -747,10 +795,12 @@
       <div style="display: flex; flex-direction: column; gap: 20px;">
         <aside class="info-card compact">
           <h3>Languages</h3>
-          <p>Telugu</p>
-          <p>Hindi</p>
-          <p>English</p>
-          <p>Marathi</p>
+          <div class="languages-list">
+            <span>Telugu</span>
+            <span>Hindi</span>
+            <span>English</span>
+            <span>Marathi</span>
+          </div>
         </aside>
         <aside class="info-card">
           <h3>Certifications</h3>
