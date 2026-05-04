@@ -86,7 +86,7 @@
     .page {
       width: min(1180px, 100% - 32px);
       margin: 0 auto;
-      padding: 32px 0 32px;
+      padding: 100px 0 32px; /* Increased top padding for fixed header */
     }
 
     .page-header {
@@ -101,16 +101,22 @@
       align-items: center;
       gap: 14px;
       flex-wrap: wrap;
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 100;
-      padding: 16px 24px;
-      margin: -16px -24px 16px -24px;
-      background: rgba(5, 8, 22, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(34, 211, 238, 0.1);
-      border-radius: 0 0 20px 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 12px 24px;
+      background: rgba(5, 8, 22, 0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(34, 211, 238, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (min-width: 1180px) {
+      .topbar {
+        padding: 12px calc((100% - 1180px) / 2 + 24px);
+      }
     }
 
     .brand-info {
@@ -432,8 +438,14 @@
 
     .skills-group {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    @media (min-width: 900px) {
+      .skills-group {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     .skills-subsection h3 {
@@ -533,6 +545,8 @@
     }
 
     .project-card {
+      display: flex;
+      flex-direction: column;
       border-radius: 26px;
       overflow: hidden;
       background: linear-gradient(180deg, rgba(15, 23, 42, 0.6), rgba(10, 18, 45, 0.8));
@@ -543,25 +557,37 @@
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
     }
 
+    @media (min-width: 900px) {
+      .project-card {
+        flex-direction: row;
+        align-items: stretch;
+      }
+    }
+
     .project-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 22px 45px rgba(0, 0, 0, 0.4);
       border-color: rgba(59, 130, 246, 0.4);
     }
 
-    .project-card div {
-      padding: 26px;
+    .project-info {
+      padding: 32px !important;
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .project-img-wrap {
       position: relative;
       overflow: hidden;
-      border-radius: 22px 22px 0 0;
+      flex: 1;
+      min-height: 250px;
     }
 
     .project-img {
       width: 100%;
-      height: 200px;
+      height: 100%;
       object-fit: cover;
       display: block;
       transition: transform 0.5s ease;
@@ -832,7 +858,7 @@
       }
 
       .projects-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
       }
       
       .hero-panel {
@@ -854,7 +880,7 @@
       }
 
       .projects-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: 1fr;
       }
     }
 
@@ -937,7 +963,7 @@
             <p>Frontend Developer focused on building high-performance web systems, responsive layouts, and polished user experiences.</p>
             <div class="hero-stats">
               <div class="stat">
-                <strong>10+</strong>
+                <strong>3</strong>
                 Projects Built
               </div>
               <div class="stat">
@@ -973,7 +999,7 @@
                 <a href="https://gharsha1199-ghv.github.io/HUMANITY-BRIDGE_G11/" target="_blank" class="button primary" style="font-size: 0.9rem; padding: 10px 20px;">View Live ↗</a>
               </div>
             </div>
-            <div>
+            <div class="project-info">
               <h3>
                 <a href="https://gharsha1199-ghv.github.io/HUMANITY-BRIDGE_G11/" target="_blank" style="color: inherit; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
                   Humanity Bridge ↗
@@ -986,6 +1012,36 @@
                 <span class="tag js">JavaScript</span>
               </div>
               <div class="project-meta"><span></span>Live Application</div>
+            </div>
+          </article>
+
+          <!-- Placeholder Project 2 -->
+          <article class="project-card" style="opacity: 0.8; filter: grayscale(0.5);">
+            <div class="project-img-wrap" style="background: rgba(255,255,255,0.03); display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 3rem; opacity: 0.2;">🚀</span>
+            </div>
+            <div class="project-info">
+              <h3>Project Two</h3>
+              <p>Next big project currently in development. Focusing on advanced React components and API integrations.</p>
+              <div class="project-tags">
+                <span class="tag" style="background: rgba(255,255,255,0.05); color: var(--muted);">Development</span>
+              </div>
+              <div class="project-meta"><span style="background: var(--muted);"></span>Coming Soon</div>
+            </div>
+          </article>
+
+          <!-- Placeholder Project 3 -->
+          <article class="project-card" style="opacity: 0.8; filter: grayscale(0.5);">
+            <div class="project-img-wrap" style="background: rgba(255,255,255,0.03); display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 3rem; opacity: 0.2;">💻</span>
+            </div>
+            <div class="project-info">
+              <h3>Project Three</h3>
+              <p>Upcoming web application focused on seamless UI/UX and performance optimization.</p>
+              <div class="project-tags">
+                <span class="tag" style="background: rgba(255,255,255,0.05); color: var(--muted);">Design</span>
+              </div>
+              <div class="project-meta"><span style="background: var(--muted);"></span>In Progress</div>
             </div>
           </article>
         </div>
@@ -1139,12 +1195,7 @@
         <div class="skills-subsection">
           <h3>🎨 Other Skills</h3>
           <div class="skills-list">
-            <div class="skill-card">
-              <span class="skill-icon" style="background: linear-gradient(135deg, #0ea5e9, #ec4899);" aria-hidden="true">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path fill="#fff" d="M4 4h16v2H4zm0 6h10v2H4zm0 6h16v2H4z"/></svg>
-              </span>
-              <span class="skill-name">UI/UX Design</span>
-            </div>
+
             <div class="skill-card">
               <span class="skill-icon" style="background: linear-gradient(135deg, #f97316, #facc15);" aria-hidden="true">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path fill="#111" d="M12 2a10 10 0 0 0-3.16 19.46L9 18.5a8 8 0 1 1 6 0l.16 2.96A10 10 0 0 0 12 2zm1 5h-2v6l5.25 3.15.75-1.23-4-2.32V7z"/></svg>
