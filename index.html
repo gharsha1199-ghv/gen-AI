@@ -438,14 +438,8 @@
 
     .skills-group {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 32px;
-    }
-
-    @media (min-width: 900px) {
-      .skills-group {
-        grid-template-columns: 1fr 1fr;
-      }
     }
 
     .skills-subsection h3 {
@@ -829,6 +823,10 @@
 
       .stat strong {
         font-size: 1.1rem;
+      }
+
+      .skills-group {
+        gap: 16px;
       }
 
       .skills-list {
